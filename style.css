@@ -1,13 +1,33 @@
+:root {
+    --text-color: black;
+    --base-color: #ffffff;
+    --base-variant: #fffff1;
+    --primary-color: #3a435d;
+    --accent-color: #0071ff;
+    --link-hover: lightskyblue;
+    --navbar-color: white;
+    --background-color: black;
+}
+
+html { 
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+}
+
 body {
     font-family: 'Times New Roman', Times, serif;
     margin: 0;
     padding: 0;
-    background-color: #778899;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    color: black;
+    background-color: var(--background-color);
+    color: var(--text-color);
     user-select: none;
+    
+    transition: background-color 0.5s ease, color 0.5s ease;
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;   /* Fill viewport height */
+    overflow-x: hidden;  /* Prevent horizontal scroll */  
 }
 
 section {
@@ -15,14 +35,30 @@ section {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;  /* Changed from height to min-height */
     text-align: center;
+    background-color: var(--base-color);
+    color: var(--text-color);
+    flex: 1;  /* Allow sections to grow and shrink */
+
+    transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 h1 {
-    
     margin-bottom: 50px;
+    color: var(--text-color);
 }
+
+.home {
+    text-align: left;
+}
+
+.home h1 {
+    background-color: var(--base-color);
+    text-align: left;
+    color: var(--text-color);
+}
+
 .link-item {
     display: flex;
     align-items: center;
@@ -36,13 +72,119 @@ h1 {
     margin-right: 15px;
     user-select: none;
 }
+
 .link-item a {
     text-decoration: none;
     font-size: 1.5em;
-    color: black;
+    color: var(--text-color);
     transition: color 0.3s ease;
     user-select: none; 
 }
+
 .link-item a:hover {
-    color: lightskyblue; 
+    color: var(--link-hover);
+}
+
+/* TOP NAVIGATION BAR - ALWAYS DARK */
+
+.topnav {
+    height: 60px;  /* Fixed typo: removed space */
+    background-color: black;  /* Always black regardless of theme */
+    overflow: hidden;
+    display: flex;
+    position: fixed;
+    padding: 0 16px;
+    align-items: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.topnav a {
+    float: left;
+    color: white;  /* Always white text on dark navbar */
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: larger;
+    user-select: none;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;  /* Push to right side */
+}
+
+.topnav a:hover {
+    color: var(--link-hover);
+    background-color: rgba(255, 255, 255, 0.1);  /* Subtle hover effect */
+}
+
+/* LIGHT/DARK MODE BUTTON */
+
+.darkmode {
+    --text-color: #ffffff;
+    --base-color: #101425;
+    --base-variant: #181c2f;
+    --primary-color: #d1d5ff;
+    --accent-color: #66aaff;
+    --link-hover: #1e90ff;
+    --navbar-color: #556666;
+    --background-color: black;
+}
+
+/* Remove navbar background override since it's always dark now */
+.darkmode .topnav {
+    background-color: black;  /* Explicitly keep black */
+}
+
+.darkmode .footer {
+    background-color: black;
+    color: white;
+}
+  
+#theme-switch {
+    cursor: pointer;
+    background-color: var(--base-variant);
+    border: none;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+#theme-switch svg {
+    fill: var(--primary-color);
+}
+
+#theme-switch svg:last-child {
+    display: none; 
+}
+
+.darkmode #theme-switch svg:first-child {
+    display: none; 
+}
+
+.darkmode #theme-switch svg:last-child {
+    display: block; 
+}
+
+/* === FOOTER === */
+.footer {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: auto;  /* Push footer to bottom */
+    flex-shrink: 0;
+    transition: background-color 0.5s ease, color 0.5s ease;  /* Smooth transitions */
 }
